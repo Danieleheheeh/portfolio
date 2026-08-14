@@ -1,401 +1,708 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Il mio spazio</title>
+<title>Parigi — Il mio taccuino</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<style>
 
-        body {
-            margin: 0;
-            font-family: Georgia, "Times New Roman", serif;
-            background: #f3efe6;
-            color: #27251f;
-            line-height: 1.7;
-        }
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(39, 37, 31, 0.96);
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f2eee6;
+    color: #292722;
+    line-height: 1.7;
+}
 
-        header h1 {
-            margin: 0;
-            color: #f3efe6;
-            font-size: 22px;
-            letter-spacing: 1px;
-        }
+/* NAVIGAZIONE */
 
-        nav a {
-            color: #f3efe6;
-            text-decoration: none;
-            margin-left: 24px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(30, 29, 27, 0.94);
+    backdrop-filter: blur(8px);
+}
 
-        nav a:hover {
-            color: #c8a96b;
-        }
+.logo {
+    color: #f2eee6;
+    font-size: 21px;
+    letter-spacing: 2px;
+}
 
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            background:
-                radial-gradient(circle at top, #d9cdb8, #f3efe6 65%);
-        }
+nav a {
+    color: #eee8dc;
+    text-decoration: none;
+    margin-left: 22px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
 
-        .hero span {
-            font-family: Arial, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 12px;
-            color: #806b43;
-        }
+nav a:hover {
+    color: #c9a66b;
+}
 
-        .hero h2 {
-            font-size: clamp(48px, 9vw, 92px);
-            line-height: 1;
-            margin: 25px 0;
-            font-weight: normal;
-        }
+/* HERO */
 
-        .hero p {
-            max-width: 650px;
-            font-size: 20px;
-            color: #5d594f;
-        }
+.hero {
+    min-height: 100vh;
+    padding: 150px 25px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-        .button {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 13px 28px;
-            background: #27251f;
-            color: white;
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-            border-radius: 30px;
-        }
+    background:
+        linear-gradient(
+            rgba(20,20,18,0.40),
+            rgba(20,20,18,0.55)
+        ),
+        url("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=2000&q=85");
 
-        .button:hover {
-            background: #806b43;
-        }
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
 
-        section {
-            max-width: 1050px;
-            margin: auto;
-            padding: 100px 25px;
-        }
+.hero small {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
 
-        .section-label {
-            font-family: Arial, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 11px;
-            color: #806b43;
-        }
+.hero h1 {
+    font-size: clamp(60px, 11vw, 130px);
+    font-weight: normal;
+    line-height: 0.9;
+    margin: 25px 0;
+}
 
-        section h2 {
-            font-size: 42px;
-            font-weight: normal;
-            margin: 10px 0 30px;
-        }
+.hero p {
+    max-width: 650px;
+    font-size: 21px;
+}
 
-        .about {
-            max-width: 750px;
-            font-size: 19px;
-        }
+.button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 30px;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-family: Arial, sans-serif;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
+.button:hover {
+    background: white;
+    color: #222;
+}
 
-        .card {
-            background: #fffdf8;
-            padding: 35px;
-            border: 1px solid #ded6c7;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
+/* SEZIONI */
 
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(39, 37, 31, 0.10);
-        }
+section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 110px 25px;
+}
 
-        .card .number {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: #806b43;
-        }
+.label {
+    color: #947848;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
 
-        .card h3 {
-            font-size: 28px;
-            font-weight: normal;
-            margin: 15px 0;
-        }
+section h2 {
+    font-size: 48px;
+    font-weight: normal;
+    margin: 10px 0 35px;
+}
 
-        .card p {
-            color: #625e54;
-        }
+.intro {
+    max-width: 760px;
+    font-size: 20px;
+}
 
-        .quote {
-            background: #27251f;
-            color: #f3efe6;
-            text-align: center;
-            max-width: none;
-            padding: 100px 25px;
-        }
+/* QUARTIERI */
 
-        .quote p {
-            max-width: 800px;
-            margin: auto;
-            font-size: 32px;
-            font-style: italic;
-            line-height: 1.4;
-        }
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+}
 
-        .projects {
-            display: grid;
-            gap: 20px;
-        }
+.card {
+    background: #fffdf8;
+    padding: 30px;
+    border: 1px solid #ddd4c4;
+    transition: 0.25s;
+}
 
-        .project {
-            padding: 30px 0;
-            border-bottom: 1px solid #cfc6b6;
-        }
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.10);
+}
 
-        .project h3 {
-            font-size: 25px;
-            font-weight: normal;
-            margin: 0 0 8px;
-        }
+.card-number {
+    color: #947848;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
 
-        footer {
-            background: #27251f;
-            color: #bdb6a9;
-            text-align: center;
-            padding: 40px 20px;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-        }
+.card h3 {
+    font-size: 27px;
+    font-weight: normal;
+    margin: 12px 0;
+}
 
-        @media (max-width: 650px) {
-            header {
-                flex-direction: column;
-                gap: 12px;
-            }
+.card p {
+    color: #625e55;
+}
 
-            nav a {
-                margin: 0 7px;
-            }
+/* ITINERARIO */
 
-            .hero h2 {
-                font-size: 55px;
-            }
+.timeline {
+    border-left: 1px solid #bfb6a5;
+    margin-left: 15px;
+    padding-left: 35px;
+}
 
-            section h2 {
-                font-size: 35px;
-            }
+.day {
+    margin-bottom: 55px;
+}
 
-            .quote p {
-                font-size: 25px;
-            }
-        }
-    </style>
+.day h3 {
+    font-size: 29px;
+    font-weight: normal;
+}
+
+.time {
+    color: #947848;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.calendar-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 9px 17px;
+    background: #292722;
+    color: white;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+/* IDEE */
+
+.quote {
+    background: #292722;
+    color: #eee8dc;
+    text-align: center;
+    padding: 110px 25px;
+}
+
+.quote p {
+    max-width: 850px;
+    margin: auto;
+    font-size: 34px;
+    font-style: italic;
+}
+
+/* LISTA */
+
+.list {
+    display: grid;
+    gap: 15px;
+}
+
+.list-item {
+    padding: 22px;
+    background: #fffdf8;
+    border-bottom: 1px solid #d4cbbb;
+}
+
+.list-item strong {
+    font-size: 19px;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 45px;
+    text-align: center;
+    background: #292722;
+    color: #aaa398;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+    header {
+        padding: 15px 20px;
+    }
+
+    nav a {
+        margin-left: 8px;
+        font-size: 11px;
+    }
+
+    .hero h1 {
+        font-size: 70px;
+    }
+
+    section h2 {
+        font-size: 38px;
+    }
+
+    .quote p {
+        font-size: 26px;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-<header>
-    <h1>Il mio spazio</h1>
 
-    <nav>
-        <a href="#chi-sono">Chi sono</a>
-        <a href="#interessi">Interessi</a>
-        <a href="#progetti">Progetti</a>
-    </nav>
+<header>
+
+<div class="logo">
+PARIGI
+</div>
+
+<nav>
+<a href="#quartieri">Quartieri</a>
+<a href="#itinerario">Itinerario</a>
+<a href="#idee">Idee</a>
+<a href="#segreti">Segreti</a>
+</nav>
+
 </header>
 
 
-<section class="hero">
+<!-- HERO -->
 
-    <span>Idee · Cultura · Curiosità</span>
+<div class="hero">
 
-    <h2>Il mio spazio</h2>
+<small>Il mio taccuino di viaggio</small>
 
-    <p>
-        Un luogo personale dove raccogliere idee,
-        passioni, progetti e cose che vale la pena scoprire.
-    </p>
+<h1>Parigi</h1>
 
-    <a class="button" href="#chi-sono">Entra</a>
+<p>
+Una città da attraversare lentamente,
+tra arte, storia, caffè, libri,
+architettura e incontri casuali.
+</p>
 
-</section>
-
-
-<section id="chi-sono">
-
-    <span class="section-label">01 — Chi sono</span>
-
-    <h2>Un viaggio tra idee e interessi</h2>
-
-    <div class="about">
-
-        <p>
-            Questo è il mio spazio personale.
-            Un luogo in continua evoluzione dove raccogliere
-            ciò che mi interessa, ciò che studio e ciò che scopro.
-        </p>
-
-        <p>
-            Mi interessano la filosofia, l'arte, la finanza,
-            la storia, la letteratura e la natura.
-            Non come mondi separati, ma come prospettive diverse
-            attraverso cui osservare il mondo.
-        </p>
-
-    </div>
-
-</section>
-
-
-<section id="interessi">
-
-    <span class="section-label">02 — Interessi</span>
-
-    <h2>Le cose che mi fanno pensare</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <span class="number">01</span>
-            <h3>Filosofia</h3>
-            <p>
-                Domande, pensatori e idee sul significato
-                dell'esistenza, sulla società e sull'uomo.
-            </p>
-        </div>
-
-        <div class="card">
-            <span class="number">02</span>
-            <h3>Arte</h3>
-            <p>
-                Pittura, architettura, estetica e opere
-                capaci di raccontare qualcosa oltre le parole.
-            </p>
-        </div>
-
-        <div class="card">
-            <span class="number">03</span>
-            <h3>Finanza</h3>
-            <p>
-                Economia, mercati, investimenti e comprensione
-                dei meccanismi che muovono il capitale.
-            </p>
-        </div>
-
-        <div class="card">
-            <span class="number">04</span>
-            <h3>Storia</h3>
-            <p>
-                Eventi, persone e civiltà del passato
-                per comprendere meglio il presente.
-            </p>
-        </div>
-
-        <div class="card">
-            <span class="number">05</span>
-            <h3>Letteratura</h3>
-            <p>
-                Libri, autori e parole capaci di cambiare
-                il modo in cui guardiamo la realtà.
-            </p>
-        </div>
-
-        <div class="card">
-            <span class="number">06</span>
-            <h3>Natura</h3>
-            <p>
-                Paesaggi, esplorazione e osservazione
-                del mondo naturale.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<div class="quote">
-
-    <p>
-        "La curiosità è il principio di ogni conoscenza."
-    </p>
+<a class="button" href="#quartieri">
+Inizia il viaggio
+</a>
 
 </div>
 
 
-<section id="progetti">
+<!-- INTRODUZIONE -->
 
-    <span class="section-label">03 — Progetti</span>
+<section>
 
-    <h2>Quello che verrà</h2>
+<span class="label">01 — Perché Parigi</span>
 
-    <div class="projects">
+<h2>Non solo una destinazione.</h2>
 
-        <div class="project">
-            <h3>Il mio primo progetto</h3>
-            <p>
-                Questo sito è il primo passo.
-                Da qui nasceranno nuove idee e nuovi progetti.
-            </p>
-        </div>
+<div class="intro">
 
-        <div class="project">
-            <h3>Appunti e riflessioni</h3>
-            <p>
-                Una raccolta di pensieri, letture,
-                scoperte e riflessioni personali.
-            </p>
-        </div>
+<p>
+Parigi non è soltanto una lista di monumenti da vedere.
+È una città da attraversare, osservare e capire.
+</p>
 
-        <div class="project">
-            <h3>Progetti futuri</h3>
-            <p>
-                Uno spazio aperto a nuove idee,
-                esperimenti e collaborazioni.
-            </p>
-        </div>
+<p>
+Questa guida nasce come un taccuino personale:
+un posto dove raccogliere luoghi famosi,
+angoli meno conosciuti, musei, passeggiate,
+ristoranti, idee e piccole scoperte.
+</p>
 
-    </div>
+</div>
 
 </section>
 
 
+<!-- QUARTIERI -->
+
+<section id="quartieri">
+
+<span class="label">02 — Quartieri</span>
+
+<h2>Parigi cambia volto.</h2>
+
+<div class="cards">
+
+
+<div class="card">
+
+<span class="card-number">01</span>
+
+<h3>Le Marais</h3>
+
+<p>
+Strade storiche, palazzi aristocratici,
+gallerie, boutique e una delle zone
+più interessanti da esplorare a piedi.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="card-number">02</span>
+
+<h3>Montmartre</h3>
+
+<p>
+Arte, salite, atelier, panorami e
+l'atmosfera della vecchia Parigi.
+Da esplorare soprattutto lontano
+dalle strade più turistiche.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="card-number">03</span>
+
+<h3>Quartiere Latino</h3>
+
+<p>
+Università, librerie, storia medievale,
+caffè e vicoli intorno alla Sorbona.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="card-number">04</span>
+
+<h3>Saint-Germain</h3>
+
+<p>
+Letteratura, filosofia, antiquariato,
+gallerie e storici caffè parigini.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="card-number">05</span>
+
+<h3>Canal Saint-Martin</h3>
+
+<p>
+Una Parigi più rilassata:
+acqua, passeggiate, locali e vita quotidiana.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="card-number">06</span>
+
+<h3>La Villette</h3>
+
+<p>
+Architettura contemporanea, cultura,
+musica, cinema all'aperto e spazi verdi.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ITINERARIO -->
+
+<section id="itinerario">
+
+<span class="label">03 — Itinerario</span>
+
+<h2>Un possibile viaggio.</h2>
+
+<div class="timeline">
+
+
+<div class="day">
+
+<span class="time">Giorno 01 — Centro storico</span>
+
+<h3>Île de la Cité → Notre-Dame → Senna</h3>
+
+<p>
+Iniziare dal cuore storico della città,
+attraversare la Senna e proseguire lentamente
+verso il Quartiere Latino.
+</p>
+
+<a class="calendar-button"
+href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Parigi%20-%20Centro%20storico&details=Île%20de%20la%20Cité%2C%20Notre-Dame%20e%20Quartiere%20Latino">
+Aggiungi al calendario
+</a>
+
+</div>
+
+
+<div class="day">
+
+<span class="time">Giorno 02 — Arte</span>
+
+<h3>Louvre → Tuileries → Musée d'Orsay</h3>
+
+<p>
+Una giornata dedicata all'arte.
+Meglio scegliere poche opere e guardarle davvero
+invece di attraversare un museo come una stazione.
+</p>
+
+<a class="calendar-button"
+href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Parigi%20-%20Giornata%20dell%27arte&details=Louvre%2C%20Jardin%20des%20Tuileries%20e%20Musée%20d%27Orsay">
+Aggiungi al calendario
+</a>
+
+</div>
+
+
+<div class="day">
+
+<span class="time">Giorno 03 — Montmartre</span>
+
+<h3>Montmartre → Pigalle → Canal Saint-Martin</h3>
+
+<p>
+Una giornata più libera:
+camminare, fotografare, fermarsi nei caffè
+e lasciare spazio all'improvvisazione.
+</p>
+
+<a class="calendar-button"
+href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Parigi%20-%20Montmartre&details=Montmartre%2C%20Pigalle%20e%20Canal%20Saint-Martin">
+Aggiungi al calendario
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- FRASE -->
+
+<div class="quote">
+
+<p>
+"Parigi è una città da vedere con gli occhi,
+ma soprattutto con il tempo."
+</p>
+
+</div>
+
+
+<!-- SEGRETI -->
+
+<section id="segreti">
+
+<span class="label">04 — Oltre i soliti posti</span>
+
+<h2>Cose che vale la pena cercare.</h2>
+
+<div class="list">
+
+
+<div class="list-item">
+
+<strong>Le librerie indipendenti</strong>
+
+<p>
+Entrare senza avere necessariamente qualcosa da comprare.
+Parigi ha una cultura libraria enorme.
+</p>
+
+</div>
+
+
+<div class="list-item">
+
+<strong>I mercati di quartiere</strong>
+
+<p>
+Un modo più interessante per osservare
+la vita quotidiana rispetto ai percorsi turistici.
+</p>
+
+</div>
+
+
+<div class="list-item">
+
+<strong>I musei meno famosi</strong>
+
+<p>
+Non esiste soltanto il Louvre.
+La rete dei musei parigini è molto più ampia:
+anche i musei della città meritano attenzione.
+</p>
+
+</div>
+
+
+<div class="list-item">
+
+<strong>La Parigi di notte</strong>
+
+<p>
+Passeggiare lungo la Senna,
+vedere le piazze illuminate
+e osservare come cambia la città dopo il tramonto.
+</p>
+
+</div>
+
+
+<div class="list-item">
+
+<strong>Perdersi volutamente</strong>
+
+<p>
+Una delle attività più semplici:
+scegliere un quartiere e camminare senza
+un itinerario preciso.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- CULTURA -->
+
+<section id="idee">
+
+<span class="label">05 — Cultura</span>
+
+<h2>Da approfondire.</h2>
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>Filosofia</h3>
+
+<p>
+Sartre, Camus, Simone de Beauvoir,
+i caffè intellettuali e la tradizione
+filosofica parigina.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Arte</h3>
+
+<p>
+Impressionismo, avanguardie,
+arte moderna e contemporanea.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Storia</h3>
+
+<p>
+Rivoluzione francese, Napoleone,
+Comune di Parigi e trasformazione
+urbana della capitale.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Letteratura</h3>
+
+<p>
+Hemingway, Proust, Hugo,
+Baudelaire e la Parigi raccontata
+dagli scrittori.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
 <footer>
 
-    <p>© 2026 — Il mio spazio personale</p>
+<p>
+PARIGI — IL MIO TACCUINO
+</p>
+
+<p>
+Un progetto personale in continua evoluzione.
+</p>
 
 </footer>
+
 
 </body>
 </html>
